@@ -84,6 +84,37 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &8148053496338765359
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 9200959518203528317}
+  m_Layer: 0
+  m_Name: bullet-spawn
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &9200959518203528317
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8148053496338765359}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.628, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 9178234802527201313}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8437593906814114739
 GameObject:
   m_ObjectHideFlags: 0
@@ -202,6 +233,7 @@ Transform:
   m_Children:
   - {fileID: 3878921738192732564}
   - {fileID: 6182832549154227701}
+  - {fileID: 9200959518203528317}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -239,7 +271,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _speed: 0.5
-  _rotatespeed: 0
 --- !u!114 &9178234802527201342
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -252,6 +283,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 44f577698a68f364aad254b7031d7223, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maincam: {fileID: 0}
 --- !u!58 &5351081485055035553
 CircleCollider2D:
   m_ObjectHideFlags: 0
