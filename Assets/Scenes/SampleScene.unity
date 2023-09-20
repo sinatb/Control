@@ -808,6 +808,10 @@ PrefabInstance:
       propertyPath: _speed
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 9178234802527201315, guid: f1dff8aa4e0a4764aa0518b4793b604f, type: 3}
+      propertyPath: shoot_timer
+      value: 0.15
+      objectReference: {fileID: 0}
     - target: {fileID: 9178234802527201317, guid: f1dff8aa4e0a4764aa0518b4793b604f, type: 3}
       propertyPath: m_Name
       value: Player

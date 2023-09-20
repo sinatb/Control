@@ -12,10 +12,11 @@ public class bullet : MonoBehaviour
     }
     private void OnCollisionEnter2D(Collision2D col)
     {
-        Destroy(gameObject);
+        if (!col.transform.CompareTag("player_bullet"))
+            Destroy(gameObject);
     }
     private void FixedUpdate()
     {
-        _rb.MovePosition(Vector2.right * (Time.deltaTime*speed));
+        _rb.MovePosition((Vector2)transform.position+ (Vector2)transform.up * (Time.deltaTime*speed));
     }
 }
