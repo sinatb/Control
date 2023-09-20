@@ -27,8 +27,8 @@ public class BasicEnemy : MonoBehaviour,INCUnit,IEnemy
         get => damage;
         set => damage = value;
     }
-    
-    
+    //check around basic enemy and try to get closer to other basic enemies to morph into 
+    //advanced enemies.
     public void PlanMove()
     {
         bool changed = false;
@@ -39,12 +39,7 @@ public class BasicEnemy : MonoBehaviour,INCUnit,IEnemy
             direction = q * direction;
             RaycastHit2D hit = Physics2D.Raycast(transform.position, direction,range);
             if (!hit) continue;
-            if (!changed && hit.transform.CompareTag("Player"))
-            {
-                _direction = direction;
-                changed = true;
-            }
-            else if (!changed && hit.transform.CompareTag("Enemy"))
+             if (!changed && hit.transform.CompareTag("Enemy"))
             {
                 _direction = direction;
                 changed = true;
@@ -52,37 +47,49 @@ public class BasicEnemy : MonoBehaviour,INCUnit,IEnemy
         }
     }
 
+    //move the enemy to the planed direction with rigidbody
     public void Move()
     {
         _rb.MovePosition((Vector2)transform.position + _direction*(Time.deltaTime*speed));
     }
 
+    //on collision enter => if it is player get destroyed
+    //if it is enemy => morph
     private void OnCollisionEnter2D(Collision2D col)
     {
         if (col.transform.CompareTag("Player"))
         {
             Attack(col.gameObject.GetComponent<Player>());
             Destroy(gameObject);
+        }else if (col.transform.CompareTag("Wall"))
+        {
+            var inNormal = col.contacts[0].normal;
+            var prevDir = _direction;
+            _direction = Vector2.Reflect(_direction, inNormal);
+            transform.rotation = Quaternion.FromToRotation(prevDir,_direction)*transform.rotation;
         }
     }
+    //attacks the player when enters the collision
     public void Attack(Player p)
     {
         p.ReceiveDamage(damage);
     }
+    //at start the enemy moves in a random direction
     private void Start()
     {
         _rb = gameObject.GetComponent<Rigidbody2D>();
         _col = gameObject.GetComponent<CircleCollider2D>();
+        //give a random direction for the enemy to move at the start
         var rndx = Random.Range(0.0f, 1.0f);
         var rndy = Random.Range(0.0f, 1.0f);
         _direction = new Vector2(rndx, rndy).normalized;
     }
-
+    //plan the next move
     private void Update()
     {
         PlanMove();
     }
-
+    //execute physical movement.
     private void FixedUpdate()
     {
         Move();
