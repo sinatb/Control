@@ -3,7 +3,7 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     [SerializeField] private float speed;
-    [SerializeField] private float shoot_timer;
+    [SerializeField] private float shootTimer;
     [SerializeField] private float timer;
     public float Speed
     {
@@ -13,13 +13,13 @@ public class Player : MonoBehaviour
 
     public float ShootTimer
     {
-        get => shoot_timer;
-        set => shoot_timer = value;
+        get => shootTimer;
+        set => shootTimer = value;
     }
-    public void ReceiveDamage(float ammount)
+    public void ReceiveDamage(float amount)
     {
         if (timer > 0)
-            timer -= ammount;
+            timer -= amount;
     }
 
 }

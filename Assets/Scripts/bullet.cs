@@ -5,7 +5,8 @@ public class bullet : MonoBehaviour
     private Rigidbody2D _rb;
     [SerializeField]
     private float speed;
-    
+
+    [SerializeField] private float damage;
     private void Start()
     {
         _rb = gameObject.GetComponent<Rigidbody2D>();
@@ -13,7 +14,11 @@ public class bullet : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D col)
     {
         if (!col.transform.CompareTag("player_bullet"))
+        {
+            var b = col.gameObject.GetComponent<IEnemy>();
+            b?.RecieveDamage(damage);
             Destroy(gameObject);
+        }
     }
     private void FixedUpdate()
     {

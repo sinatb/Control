@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -53,6 +52,10 @@ public class BasicEnemy : MonoBehaviour,INCUnit,IEnemy
         _rb.MovePosition((Vector2)transform.position + _direction*(Time.deltaTime*speed));
     }
 
+    public void RecieveDamage(float amount)
+    {
+        health -= amount;
+    }
     //on collision enter => if it is player get destroyed
     //if it is enemy => morph
     private void OnCollisionEnter2D(Collision2D col)
@@ -87,6 +90,8 @@ public class BasicEnemy : MonoBehaviour,INCUnit,IEnemy
     //plan the next move
     private void Update()
     {
+        if (health <= 0)
+            Destroy(gameObject);
         PlanMove();
     }
     //execute physical movement.
