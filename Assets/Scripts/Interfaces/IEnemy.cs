@@ -6,5 +6,5 @@ public interface IEnemy
         set;
     }
     public void Attack(Player p);
-    public void RecieveDamage(float amount);
+    public void ReceiveDamage(float amount);
 }

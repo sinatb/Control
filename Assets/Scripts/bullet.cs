@@ -16,7 +16,7 @@ public class bullet : MonoBehaviour
         if (!col.transform.CompareTag("player_bullet"))
         {
             var b = col.gameObject.GetComponent<IEnemy>();
-            b?.RecieveDamage(damage);
+            b?.ReceiveDamage(damage);
             Destroy(gameObject);
         }
     }

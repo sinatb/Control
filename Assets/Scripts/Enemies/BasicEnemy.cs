@@ -8,6 +8,7 @@ public class BasicEnemy : MonoBehaviour,INCUnit,IEnemy
     [SerializeField] private float damage;
     [SerializeField] private float range;
     private Rigidbody2D _rb;
+    private Animation anim;
     private Vector2 _direction;
     private CircleCollider2D _col;
     public float Health
@@ -52,7 +53,7 @@ public class BasicEnemy : MonoBehaviour,INCUnit,IEnemy
         _rb.MovePosition((Vector2)transform.position + _direction*(Time.deltaTime*speed));
     }
 
-    public void RecieveDamage(float amount)
+    public void ReceiveDamage(float amount)
     {
         health -= amount;
     }
@@ -70,6 +71,10 @@ public class BasicEnemy : MonoBehaviour,INCUnit,IEnemy
             var prevDir = _direction;
             _direction = Vector2.Reflect(_direction, inNormal);
             transform.rotation = Quaternion.FromToRotation(prevDir,_direction)*transform.rotation;
+        }else if (col.transform.CompareTag("Enemy"))
+        {
+            speed = 0;
+            anim.Play();
         }
     }
     //attacks the player when enters the collision
@@ -86,6 +91,8 @@ public class BasicEnemy : MonoBehaviour,INCUnit,IEnemy
         var rndx = Random.Range(0.0f, 1.0f);
         var rndy = Random.Range(0.0f, 1.0f);
         _direction = new Vector2(rndx, rndy).normalized;
+        anim = gameObject.GetComponent<Animation>();
+        anim.Stop();
     }
     //plan the next move
     private void Update()
