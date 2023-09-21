@@ -15,6 +15,7 @@ public interface INCUnit
     public Vector2 Direction
     {
         get;
+        set;
     }
     public void PlanMove();
     public void Move();

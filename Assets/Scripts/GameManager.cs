@@ -29,7 +29,7 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);
         }
     }
-    private void EnemySpwaner()
+    private void EnemySpawner()
     {
         if (_basicEnemyCount < 5 && canSpawn)
         {
@@ -43,6 +43,6 @@ public class GameManager : MonoBehaviour
     }
     private void Update()
     {
-        EnemySpwaner();
+        EnemySpawner();
     }
 }

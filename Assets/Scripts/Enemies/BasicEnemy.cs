@@ -8,7 +8,6 @@ public class BasicEnemy : MonoBehaviour,INCUnit,IEnemy
     [SerializeField] private float damage;
     [SerializeField] private float range;
     private Rigidbody2D _rb;
-    private Animation anim;
     private Vector2 _direction;
     private CircleCollider2D _col;
     public float Health
@@ -21,7 +20,12 @@ public class BasicEnemy : MonoBehaviour,INCUnit,IEnemy
         get => speed;
         set => speed = value;
     }
-    public Vector2 Direction => _direction; 
+
+    public Vector2 Direction
+    {
+        get => _direction;
+        set => _direction = value;
+    }
     public float Damage
     {
         get => damage;
@@ -57,26 +61,7 @@ public class BasicEnemy : MonoBehaviour,INCUnit,IEnemy
     {
         health -= amount;
     }
-    //on collision enter => if it is player get destroyed
-    //if it is enemy => morph
-    private void OnCollisionEnter2D(Collision2D col)
-    {
-        if (col.transform.CompareTag("Player"))
-        {
-            Attack(col.gameObject.GetComponent<Player>());
-            Destroy(gameObject);
-        }else if (col.transform.CompareTag("Wall"))
-        {
-            var inNormal = col.contacts[0].normal;
-            var prevDir = _direction;
-            _direction = Vector2.Reflect(_direction, inNormal);
-            transform.rotation = Quaternion.FromToRotation(prevDir,_direction)*transform.rotation;
-        }else if (col.transform.CompareTag("Enemy"))
-        {
-            speed = 0;
-            anim.Play();
-        }
-    }
+
     //attacks the player when enters the collision
     public void Attack(Player p)
     {
@@ -91,8 +76,6 @@ public class BasicEnemy : MonoBehaviour,INCUnit,IEnemy
         var rndx = Random.Range(0.0f, 1.0f);
         var rndy = Random.Range(0.0f, 1.0f);
         _direction = new Vector2(rndx, rndy).normalized;
-        anim = gameObject.GetComponent<Animation>();
-        anim.Stop();
     }
     //plan the next move
     private void Update()
