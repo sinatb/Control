@@ -4,6 +4,8 @@ public class BasicEnemyCollision : MonoBehaviour
 {
     private BasicEnemy _be;
 
+    public delegate void AnimationStart();
+    public static event AnimationStart OnAnimationStart;
     private void Awake()
     {
         _be = gameObject.GetComponent<BasicEnemy>();
@@ -26,7 +28,18 @@ public class BasicEnemyCollision : MonoBehaviour
             _be.Direction = Quaternion.FromToRotation(prevDir,direction)*_be.Direction;
         }else if (col.transform.CompareTag("Enemy"))
         {
+            var be2 = col.gameObject.GetComponent<BasicEnemy>();
+            //changing tag of both enemies
+            _be.gameObject.tag = "Morphing_Enemy";
+            be2.gameObject.tag = "Morphing_Enemy";
+            //changing health of both enemies
+            var tmp = _be.Health;
+            _be.Health += be2.Health;
+            be2.Health += tmp;
+            //changing speed of both enemies
             _be.Speed = 0;
+            be2.Speed = 0;
+            OnAnimationStart?.Invoke();
         }
     }
 }
