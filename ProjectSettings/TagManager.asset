@@ -7,6 +7,7 @@ TagManager:
   - player_bullet
   - Enemy
   - Wall
+  - Morphing_Enemy
   layers:
   - Default
   - TransparentFX

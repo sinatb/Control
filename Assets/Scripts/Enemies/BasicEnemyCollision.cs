@@ -3,9 +3,6 @@ using UnityEngine;
 public class BasicEnemyCollision : MonoBehaviour
 {
     private BasicEnemy _be;
-
-    public delegate void AnimationStart();
-    public static event AnimationStart OnAnimationStart;
     private void Awake()
     {
         _be = gameObject.GetComponent<BasicEnemy>();
@@ -19,27 +16,28 @@ public class BasicEnemyCollision : MonoBehaviour
         {
             _be.Attack(col.gameObject.GetComponent<Player>());
             Destroy(gameObject);
-        }else if (col.transform.CompareTag("Wall"))
+        }else if (col.transform.CompareTag("Wall") || col.transform.CompareTag("Morphing_Enemy"))
         {
             var inNormal = col.contacts[0].normal;
             var direction = _be.Direction;
             var prevDir = direction;
             direction = Vector2.Reflect(direction, inNormal);
             _be.Direction = Quaternion.FromToRotation(prevDir,direction)*_be.Direction;
-        }else if (col.transform.CompareTag("Enemy"))
+        }else if (col.transform.CompareTag("Enemy") && transform.CompareTag("Enemy"))
         {
             var be2 = col.gameObject.GetComponent<BasicEnemy>();
             //changing tag of both enemies
-            _be.gameObject.tag = "Morphing_Enemy";
-            be2.gameObject.tag = "Morphing_Enemy";
+            _be.transform.tag = "Morphing_Enemy";
+            be2.transform.tag = "Morphing_Enemy";
             //changing health of both enemies
-            var tmp = _be.Health;
             _be.Health += be2.Health;
-            be2.Health += tmp;
+            be2.Health = _be.Health;
             //changing speed of both enemies
             _be.Speed = 0;
             be2.Speed = 0;
-            OnAnimationStart?.Invoke();
+            //animate the 2 balls
+            _be.GetComponent<BasicEnemyAnimation>().Animate();
+            be2.GetComponent<BasicEnemyAnimation>().Animate();
         }
     }
 }

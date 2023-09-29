@@ -6,9 +6,8 @@ public class BasicEnemyAnimation : MonoBehaviour
     private void Awake()
     {
         _anim = gameObject.GetComponent<Animation>();
-        BasicEnemyCollision.OnAnimationStart += Animate;
     }
-    private void Animate()
+    public void Animate()
     {
         _anim.Play();
     }
