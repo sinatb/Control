@@ -11,4 +11,13 @@ public class BasicEnemyAnimation : MonoBehaviour
     {
         _anim.Play();
     }
+
+    public void AnimationEnd()
+    {
+        var bemm = gameObject.GetComponent<BasicEnemyMorphManager>();
+        if (bemm == null) return;
+        bemm.Die();
+        bemm.
+        
+    }
 }

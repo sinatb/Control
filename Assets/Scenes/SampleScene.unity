@@ -535,10 +535,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy
       objectReference: {fileID: 0}
-    - target: {fileID: 5690091900356325156, guid: cdc84bdb6f66ec14587b998791345e48, type: 3}
-      propertyPath: m_TagString
-      value: Morphing_Enemy
-      objectReference: {fileID: 0}
     - target: {fileID: 9221678102967673915, guid: cdc84bdb6f66ec14587b998791345e48, type: 3}
       propertyPath: m_RootOrder
       value: 1

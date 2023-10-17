@@ -10,6 +10,10 @@ public class GameManager : MonoBehaviour
     private int _basicEnemyCount;
     private int _advancedEnemyCount;
 
+    public static void BasicEnemyMorph(Vector2 spawnPos)
+    {
+        //morph logic here
+    }
     private IEnumerator SpawnTimer()
     {
         if (!canSpawn)
