@@ -10,9 +10,12 @@ public class GameManager : MonoBehaviour
     private int _basicEnemyCount;
     private int _advancedEnemyCount;
 
-    public static void BasicEnemyMorph(Vector2 spawnPos)
+    public delegate void Morph(Vector2 spawnPos);
+    public static Morph m;
+
+    public void BasicEnemyMorph(Vector2 spawnPos)
     {
-        //morph logic here
+        factories[1].GetEnemy(spawnPos);
     }
     private IEnumerator SpawnTimer()
     {
@@ -27,6 +30,7 @@ public class GameManager : MonoBehaviour
         if (Instance == null)
         {
             Instance = this;
+            m += BasicEnemyMorph;
         }
         else
         {

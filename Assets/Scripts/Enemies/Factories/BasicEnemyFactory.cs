@@ -2,10 +2,10 @@ using UnityEngine;
 
 public class BasicEnemyFactory : EnemyFactory
 {
-    [SerializeField] private GameObject enemyprefab;
+    [SerializeField] private GameObject enemyPrefab;
     public override IEnemy GetEnemy(Vector3 pos)
     {
-        GameObject instance = Instantiate(enemyprefab, pos, Quaternion.identity,gameObject.transform);
+        var instance = Instantiate(enemyPrefab, pos, Quaternion.identity,gameObject.transform);
         IEnemy enemy = instance.GetComponent<BasicEnemy>();
         return enemy;
     }

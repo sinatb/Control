@@ -12,7 +12,6 @@ public class BasicEnemyMorphManager : MonoBehaviour
     }
     public void Die()
     {
-        
         Destroy(be1.gameObject);
         Destroy(be2.gameObject);
     }

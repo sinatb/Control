@@ -1,8 +1,17 @@
+using System;
+using System.Collections;
 using UnityEngine;
 
 public class BasicEnemyAnimation : MonoBehaviour
 {
     private Animation _anim;
+    private float _time = 0.5f;
+    private bool _isDone;
+    private IEnumerator Timer(float time)
+    {
+        yield return new WaitForSeconds(time);
+        _isDone = true;
+    }
     private void Awake()
     {
         _anim = gameObject.GetComponent<Animation>();
@@ -10,14 +19,20 @@ public class BasicEnemyAnimation : MonoBehaviour
     public void Animate()
     {
         _anim.Play();
+        StartCoroutine(Timer(_time));
     }
 
-    public void AnimationEnd()
+    private void Update()
+    {
+        if (_isDone)
+            EndAnimation();
+    }
+
+    public void EndAnimation()
     {
         var bemm = gameObject.GetComponent<BasicEnemyMorphManager>();
         if (bemm == null) return;
         bemm.Die();
-        bemm.
-        
+        GameManager.m?.Invoke(bemm.GetPos());
     }
 }
