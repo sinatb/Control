@@ -16,6 +16,7 @@ public class AdvancedEnemy : MonoBehaviour,INCUnit,IEnemy
     private Rigidbody2D _rb;
     private Vector2 _direction;
     private bool _isAttacking;
+    private AdvancedEnemyShoot _aes;
     public float Health
     {
         get => health;
@@ -48,6 +49,7 @@ public class AdvancedEnemy : MonoBehaviour,INCUnit,IEnemy
     private void Start()
     {
         _rb = gameObject.GetComponent<Rigidbody2D>();
+        _aes = GetComponent<AdvancedEnemyShoot>();
         _maxSpeed = speed;
         var rndx = Random.Range(0.0f, 1.0f);
         var rndy = Random.Range(0.0f, 1.0f);
@@ -62,7 +64,11 @@ public class AdvancedEnemy : MonoBehaviour,INCUnit,IEnemy
             var direction = Vector3.up;
             direction = q * direction;
             var hit = Physics2D.Raycast(transform.position, direction,range);
-            if (!hit) continue;
+            if (!hit)
+            {
+                _canAttack = false;
+                continue;
+            };
             if (!hit.transform.CompareTag("Player")) continue;
             _target = hit.transform.GetComponent<Player>();
             speed = Mathf.Lerp(speed, hit.distance > 3.0f ? _maxSpeed : 0.0f, 0.1f*Time.deltaTime);
@@ -84,7 +90,7 @@ public class AdvancedEnemy : MonoBehaviour,INCUnit,IEnemy
     {
         if (_canAttack)
         {
-            Debug.Log(transform.name);
+            _aes.Shoot(p.transform.position);
         }
     }
     public void ReceiveDamage(float amount)

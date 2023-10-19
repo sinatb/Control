@@ -6,7 +6,7 @@ using UnityEngine.Serialization;
 public class PlayerShoot : MonoBehaviour
 {
     [SerializeField] private GameObject bullet;
-    [FormerlySerializedAs("bullet_spawn")] [SerializeField] private GameObject bulletSpawn;
+    [SerializeField] private GameObject bulletSpawn;
     private float _shootTimer;
     private bool _canshoot;
     private Player _p;

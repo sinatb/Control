@@ -9,6 +9,7 @@ TagManager:
   - Wall
   - Morphing_Enemy
   - Advanced_Enemy
+  - Enemy_Bullet
   layers:
   - Default
   - TransparentFX

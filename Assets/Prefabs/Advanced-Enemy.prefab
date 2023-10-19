@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 4410678946513798390}
   - component: {fileID: 1828837116}
   - component: {fileID: 9131272974927839502}
+  - component: {fileID: 8369379692951747878}
   m_Layer: 0
   m_Name: Advanced-Enemy
   m_TagString: Advanced_Enemy
@@ -169,3 +170,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7082cbd0b029547448cf9a8a135a8527, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &8369379692951747878
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4410678946513798391}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 35ca6568cdeb84e48a8e362879d8e275, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bullet: {fileID: 1814588243855773776, guid: f52bc85aaec8d344ca72d9e333168456, type: 3}
