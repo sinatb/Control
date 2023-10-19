@@ -5,7 +5,7 @@ using UnityEngine;
 public class BasicEnemyAnimation : MonoBehaviour
 {
     private Animation _anim;
-    private float _time = 0.5f;
+    private float _time = 1.0f;
     private bool _isDone;
     private IEnumerator Timer(float time)
     {

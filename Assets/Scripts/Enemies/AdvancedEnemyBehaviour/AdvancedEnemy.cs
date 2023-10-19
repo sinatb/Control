@@ -1,4 +1,6 @@
 using System;
+using System.Collections;
+using System.Net;
 using UnityEngine;
 using Random = UnityEngine.Random;
 public class AdvancedEnemy : MonoBehaviour,INCUnit,IEnemy
@@ -7,9 +9,13 @@ public class AdvancedEnemy : MonoBehaviour,INCUnit,IEnemy
     [SerializeField] private float speed;
     [SerializeField] private float damage;
     [SerializeField] private float range;
+    [SerializeField] private float attackTime;
+    private Player _target;
+    private bool _canAttack;
     private float _maxSpeed;
     private Rigidbody2D _rb;
     private Vector2 _direction;
+    private bool _isAttacking;
     public float Health
     {
         get => health;
@@ -32,11 +38,17 @@ public class AdvancedEnemy : MonoBehaviour,INCUnit,IEnemy
         set => damage = value;
     }
 
+    private IEnumerator AttackTimer(float time)
+    {
+        _isAttacking = true;
+        yield return new WaitForSeconds(time);
+        _canAttack = true;
+        _isAttacking = false;
+    }
     private void Start()
     {
         _rb = gameObject.GetComponent<Rigidbody2D>();
         _maxSpeed = speed;
-        //give a random direction for the enemy to move at the start
         var rndx = Random.Range(0.0f, 1.0f);
         var rndy = Random.Range(0.0f, 1.0f);
         _direction = new Vector2(rndx, rndy).normalized;
@@ -44,22 +56,22 @@ public class AdvancedEnemy : MonoBehaviour,INCUnit,IEnemy
 
     public void PlanMove()
     {
-        for (int i = 0; i < 360; i++)
+        for (var i = 0; i < 360; i++)
         {
-            Quaternion q = Quaternion.AngleAxis(i, Vector3.forward);
+            var q = Quaternion.AngleAxis(i, Vector3.forward);
             var direction = Vector3.up;
             direction = q * direction;
-            RaycastHit2D hit = Physics2D.Raycast(transform.position, direction,range);
+            var hit = Physics2D.Raycast(transform.position, direction,range);
             if (!hit) continue;
-            if (hit.transform.CompareTag("Player"))
+            if (!hit.transform.CompareTag("Player")) continue;
+            _target = hit.transform.GetComponent<Player>();
+            speed = Mathf.Lerp(speed, hit.distance > 3.0f ? _maxSpeed : 0.0f, 0.1f*Time.deltaTime);
+            if (hit.distance <= 4.0f && !_isAttacking)
             {
-                if (hit.distance > 3.0f)
-                    speed = Mathf.Lerp(speed,_maxSpeed,0.1f*Time.deltaTime);
-                else
-                    speed = Mathf.Lerp(speed, 0.0f, 0.1f*Time.deltaTime);
-                _direction = direction;
-
+                StartCoroutine(AttackTimer(attackTime));
+                _canAttack = false;
             }
+            _direction = direction;
         }
     }
 
@@ -70,7 +82,10 @@ public class AdvancedEnemy : MonoBehaviour,INCUnit,IEnemy
 
     public void Attack(Player p)
     {
-        throw new System.NotImplementedException();
+        if (_canAttack)
+        {
+            Debug.Log(transform.name);
+        }
     }
     public void ReceiveDamage(float amount)
     {
@@ -80,7 +95,10 @@ public class AdvancedEnemy : MonoBehaviour,INCUnit,IEnemy
     {
         if (health <= 0)
             Destroy(gameObject);
+        if (_target != null)
+            Attack(_target);
         PlanMove();
+
     }
     private void FixedUpdate()
     {

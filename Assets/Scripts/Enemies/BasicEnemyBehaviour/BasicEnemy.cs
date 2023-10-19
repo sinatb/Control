@@ -34,19 +34,17 @@ public class BasicEnemy : MonoBehaviour,INCUnit,IEnemy
     //advanced enemies.
     public void PlanMove()
     {
-        bool changed = false;
-        for (int i = 0; i < 360; i++)
+        var changed = false;
+        for (var i = 0; i < 360; i++)
         {
-            Quaternion q = Quaternion.AngleAxis(i, Vector3.forward);
+            var q = Quaternion.AngleAxis(i, Vector3.forward);
             var direction = Vector3.up;
             direction = q * direction;
-            RaycastHit2D hit = Physics2D.Raycast(transform.position, direction,range);
+            var hit = Physics2D.Raycast(transform.position, direction,range);
             if (!hit) continue;
-             if (!changed && hit.transform.CompareTag("Enemy"))
-            {
-                _direction = direction;
-                changed = true;
-            }
+            if (changed || !hit.transform.CompareTag("Enemy")) continue;
+            _direction = direction;
+             changed = true;
         }
     }
 
