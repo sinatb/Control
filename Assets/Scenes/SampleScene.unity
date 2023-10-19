@@ -205,13 +205,13 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4410678946513798389, guid: 9e3936a6dcc512b46a37458f6c7ba3d7, type: 3}
+      propertyPath: m_Mass
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 4410678946513798391, guid: 9e3936a6dcc512b46a37458f6c7ba3d7, type: 3}
       propertyPath: m_Name
       value: Advanced-Enemy
-      objectReference: {fileID: 0}
-    - target: {fileID: 4410678946513798391, guid: 9e3936a6dcc512b46a37458f6c7ba3d7, type: 3}
-      propertyPath: m_TagString
-      value: Advanced_Enemy
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9e3936a6dcc512b46a37458f6c7ba3d7, type: 3}
@@ -961,27 +961,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1828837115 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4410678946513798391, guid: 9e3936a6dcc512b46a37458f6c7ba3d7, type: 3}
-  m_PrefabInstance: {fileID: 28471281}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1828837116
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1828837115}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2281a4d157fc2aa4baa8f2b82da09355, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  health: 150
-  speed: 2
-  damage: 10
-  range: 5
 --- !u!1 &2041517450 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8148053496338765359, guid: f1dff8aa4e0a4764aa0518b4793b604f, type: 3}

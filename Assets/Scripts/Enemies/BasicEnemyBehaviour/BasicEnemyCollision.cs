@@ -19,7 +19,8 @@ public class BasicEnemyCollision : MonoBehaviour
             Destroy(gameObject);
             return;
         }
-        if (col.transform.CompareTag("Wall") || col.transform.CompareTag("Morphing_Enemy"))
+        if (col.transform.CompareTag("Wall") || col.transform.CompareTag("Morphing_Enemy") 
+                                             || col.transform.CompareTag("Advanced_Enemy"))
         {
             var inNormal = col.contacts[0].normal;
             var direction = _be.Direction;

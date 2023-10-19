@@ -53,7 +53,10 @@ public class AdvancedEnemy : MonoBehaviour,INCUnit,IEnemy
             if (!hit) continue;
             if (hit.transform.CompareTag("Player"))
             {
-                _direction = direction;
+                if (hit.distance > 3.0f)
+                    _direction = direction;
+                else
+                    _direction = Vector2.zero;
             }
         }
     }

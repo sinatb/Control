@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 4410678946513798389}
   - component: {fileID: 4410678946513798390}
   - component: {fileID: 1828837116}
+  - component: {fileID: 9131272974927839502}
   m_Layer: 0
   m_Name: Advanced-Enemy
   m_TagString: Advanced_Enemy
@@ -107,7 +108,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!60 &4410678946513798390
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -155,3 +156,15 @@ MonoBehaviour:
   speed: 2
   damage: 10
   range: 5
+--- !u!114 &9131272974927839502
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4410678946513798391}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7082cbd0b029547448cf9a8a135a8527, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
