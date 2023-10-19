@@ -7,8 +7,8 @@ public class AdvancedEnemy : MonoBehaviour,INCUnit,IEnemy
     [SerializeField] private float speed;
     [SerializeField] private float damage;
     [SerializeField] private float range;
+    private float _maxSpeed;
     private Rigidbody2D _rb;
-    private Collider2D _col;
     private Vector2 _direction;
     public float Health
     {
@@ -35,7 +35,7 @@ public class AdvancedEnemy : MonoBehaviour,INCUnit,IEnemy
     private void Start()
     {
         _rb = gameObject.GetComponent<Rigidbody2D>();
-        _col = gameObject.GetComponent<CircleCollider2D>();
+        _maxSpeed = speed;
         //give a random direction for the enemy to move at the start
         var rndx = Random.Range(0.0f, 1.0f);
         var rndy = Random.Range(0.0f, 1.0f);
@@ -54,9 +54,11 @@ public class AdvancedEnemy : MonoBehaviour,INCUnit,IEnemy
             if (hit.transform.CompareTag("Player"))
             {
                 if (hit.distance > 3.0f)
-                    _direction = direction;
+                    speed = Mathf.Lerp(speed,_maxSpeed,0.1f*Time.deltaTime);
                 else
-                    _direction = Vector2.zero;
+                    speed = Mathf.Lerp(speed, 0.0f, 0.1f*Time.deltaTime);
+                _direction = direction;
+
             }
         }
     }

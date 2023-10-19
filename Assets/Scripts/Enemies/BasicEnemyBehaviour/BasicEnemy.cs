@@ -9,7 +9,6 @@ public class BasicEnemy : MonoBehaviour,INCUnit,IEnemy
     [SerializeField] private float range;
     private Rigidbody2D _rb;
     private Vector2 _direction;
-    private CircleCollider2D _col;
     public float Health
     {
         get => health;
@@ -71,7 +70,6 @@ public class BasicEnemy : MonoBehaviour,INCUnit,IEnemy
     private void Start()
     {
         _rb = gameObject.GetComponent<Rigidbody2D>();
-        _col = gameObject.GetComponent<CircleCollider2D>();
         //give a random direction for the enemy to move at the start
         var rndx = Random.Range(0.0f, 1.0f);
         var rndy = Random.Range(0.0f, 1.0f);
