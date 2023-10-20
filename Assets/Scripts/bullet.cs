@@ -13,7 +13,7 @@ public class bullet : MonoBehaviour
     }
     private void OnCollisionEnter2D(Collision2D col)
     {
-        if (col.transform.CompareTag("player_bullet") || col.transform.CompareTag("Enemy_Bullet")) return;
+        if (col.transform.CompareTag("player_bullet")) return;
         var b = col.gameObject.GetComponent<IEnemy>();
         var c = col.gameObject.GetComponent<Player>();
         if (transform.CompareTag("player_bullet"))
