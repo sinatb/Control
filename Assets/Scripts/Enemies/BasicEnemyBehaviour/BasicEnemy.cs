@@ -77,12 +77,20 @@ public class BasicEnemy : MonoBehaviour,INCUnit,IEnemy
     private void Update()
     {
         if (health <= 0)
+        {
+            Die();
             Destroy(gameObject);
+        }
         PlanMove();
     }
     //execute physical movement.
     private void FixedUpdate()
     {
         Move();
+    }
+
+    public void Die()
+    {
+        GameManager.Instance.EnemyDeath(EnemyType.BasicEnemy);
     }
 }

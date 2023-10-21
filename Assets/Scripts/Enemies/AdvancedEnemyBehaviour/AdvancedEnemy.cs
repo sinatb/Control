@@ -100,11 +100,18 @@ public class AdvancedEnemy : MonoBehaviour,INCUnit,IEnemy
     private void Update()
     {
         if (health <= 0)
+        {
+            Die();
             Destroy(gameObject);
+        }
         if (_target != null)
             Attack(_target);
         PlanMove();
 
+    }
+    public void Die()
+    {
+        GameManager.Instance.EnemyDeath(EnemyType.AdvancedEnemy);
     }
     private void FixedUpdate()
     {

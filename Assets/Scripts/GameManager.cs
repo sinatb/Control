@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class GameManager : MonoBehaviour
 {
@@ -16,6 +17,7 @@ public class GameManager : MonoBehaviour
     public void BasicEnemyMorph(Vector2 spawnPos)
     {
         factories[1].GetEnemy(spawnPos);
+        _advancedEnemyCount++;
     }
     private IEnumerator SpawnTimer()
     {
@@ -48,6 +50,16 @@ public class GameManager : MonoBehaviour
             canSpawn = false;
             StartCoroutine(SpawnTimer());
         }
+    }
+
+    public void EnemyDeath(EnemyType e)
+    {
+        if (e == EnemyType.BasicEnemy)
+            _basicEnemyCount--;
+        else
+            _advancedEnemyCount--;
+        canSpawn = false;
+        StartCoroutine(SpawnTimer());
     }
     private void Update()
     {
