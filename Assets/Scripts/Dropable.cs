@@ -6,10 +6,14 @@ public class Dropable : MonoBehaviour
 {
     public float AddTime;
     [SerializeField] private float LifeTime;
+    public void die()
+    {
+        Destroy(gameObject);
+    }
     private void Update()
     {
         if (LifeTime <= 0)
-            Destroy(gameObject);
+            die();
         LifeTime -= Time.deltaTime;
     }
 }
