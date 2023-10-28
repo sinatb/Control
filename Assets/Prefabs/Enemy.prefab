@@ -106,6 +106,7 @@ MonoBehaviour:
   speed: 3
   damage: 5
   range: 1
+  Dropable: {fileID: 6254557158187774805, guid: 0e8b5f9900e2e3841b0377d331ce62c9, type: 3}
 --- !u!58 &4287556063635535991
 CircleCollider2D:
   m_ObjectHideFlags: 0

@@ -7,6 +7,7 @@ public class BasicEnemy : MonoBehaviour,INCUnit,IEnemy
     [SerializeField] private float speed;
     [SerializeField] private float damage;
     [SerializeField] private float range;
+    [SerializeField] private GameObject Dropable;
     private Rigidbody2D _rb;
     private Vector2 _direction;
     public float Health
@@ -91,6 +92,8 @@ public class BasicEnemy : MonoBehaviour,INCUnit,IEnemy
 
     public void Die()
     {
+        Instantiate(Dropable, transform.position,
+            Quaternion.identity);
         GameManager.Instance.EnemyDeath(EnemyType.BasicEnemy);
     }
 }

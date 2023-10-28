@@ -158,6 +158,7 @@ MonoBehaviour:
   damage: 10
   range: 5
   attackTime: 2
+  Dropable: {fileID: 6254557158187774805, guid: 0e8b5f9900e2e3841b0377d331ce62c9, type: 3}
 --- !u!114 &9131272974927839502
 MonoBehaviour:
   m_ObjectHideFlags: 0

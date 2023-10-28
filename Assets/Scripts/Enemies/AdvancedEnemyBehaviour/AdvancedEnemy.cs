@@ -10,6 +10,8 @@ public class AdvancedEnemy : MonoBehaviour,INCUnit,IEnemy
     [SerializeField] private float damage;
     [SerializeField] private float range;
     [SerializeField] private float attackTime;
+    [SerializeField] private GameObject Dropable;
+
     private Player _target;
     private bool _canAttack;
     private float _maxSpeed;
@@ -111,6 +113,8 @@ public class AdvancedEnemy : MonoBehaviour,INCUnit,IEnemy
     }
     public void Die()
     {
+        Instantiate(Dropable, transform.position,
+        Quaternion.identity);
         GameManager.Instance.EnemyDeath(EnemyType.AdvancedEnemy);
     }
     private void FixedUpdate()
