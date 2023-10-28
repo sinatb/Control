@@ -12,7 +12,7 @@ public class PlayerBoost : MonoBehaviour
     }
     private void Update()
     {
-        if (Input.GetKeyUp(KeyCode.LeftShift) && !_isBoosting) 
+        if (Input.GetKeyDown(KeyCode.LeftShift) && !_isBoosting) 
         {
             _isBoosting = true;
             StartCoroutine(BoostCalculator());           
