@@ -10,6 +10,7 @@ TagManager:
   - Morphing_Enemy
   - Advanced_Enemy
   - Enemy_Bullet
+  - Dropable
   layers:
   - Default
   - TransparentFX

@@ -8,8 +8,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private EnemyFactory[] factories;
     [SerializeField] private float spawntimer;
     private bool canSpawn = true;
-    private int _basicEnemyCount;
-    private int _advancedEnemyCount;
+    [SerializeField]private int _basicEnemyCount;
+    [SerializeField]private int _advancedEnemyCount;
 
     public delegate void Morph(Vector2 spawnPos);
     public static Morph m;
@@ -17,6 +17,7 @@ public class GameManager : MonoBehaviour
     public void BasicEnemyMorph(Vector2 spawnPos)
     {
         factories[1].GetEnemy(spawnPos);
+        _basicEnemyCount -=2;
         _advancedEnemyCount++;
     }
     private IEnumerator SpawnTimer()
@@ -41,12 +42,13 @@ public class GameManager : MonoBehaviour
     }
     private void EnemySpawner()
     {
-        if (_basicEnemyCount < 5 && canSpawn)
+        if (_basicEnemyCount < 5 && _advancedEnemyCount < 3 && canSpawn)
         {
             var x = Random.Range(-11.0f, 11.0f);
             var y = Random.Range(-4.0f, 4.0f);
             factories[0].GetEnemy(new Vector3(x, y, 1.0f));
             _basicEnemyCount++;
+            StopAllCoroutines();
             canSpawn = false;
             StartCoroutine(SpawnTimer());
         }
@@ -58,6 +60,7 @@ public class GameManager : MonoBehaviour
             _basicEnemyCount--;
         else
             _advancedEnemyCount--;
+        StopAllCoroutines();
         canSpawn = false;
         StartCoroutine(SpawnTimer());
     }

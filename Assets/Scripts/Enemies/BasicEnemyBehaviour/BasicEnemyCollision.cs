@@ -16,6 +16,7 @@ public class BasicEnemyCollision : MonoBehaviour
         if (col.transform.CompareTag("Player"))
         {
             _be.Attack(col.gameObject.GetComponent<Player>());
+            GameManager.Instance.EnemyDeath(EnemyType.BasicEnemy);
             Destroy(gameObject);
             return;
         }
