@@ -242,6 +242,7 @@ GameObject:
   - component: {fileID: 539552064}
   - component: {fileID: 1910004344}
   - component: {fileID: 4044010128632575540}
+  - component: {fileID: 5168602332243249073}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -303,7 +304,7 @@ MonoBehaviour:
   speed: 3
   shootTimer: 0.15
   timer: 0
-  MaxTime: 0
+  MaxTime: 10
 --- !u!114 &9178234802527201342
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -371,3 +372,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 244d768c465648d4b8e08f668ea73337, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &5168602332243249073
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9178234802527201317}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2aa5fa93fe5469a4bb4217fad2145346, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  RageTime: 3
