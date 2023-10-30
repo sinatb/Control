@@ -6,6 +6,8 @@ public class Player : MonoBehaviour
     [SerializeField] private float shootTimer;
     [SerializeField] private float timer;
     [SerializeField] private float MaxTime;
+    private bool _inRage;
+    private PlayerRage _rm;
     public float Speed
     {
         get => speed;
@@ -13,14 +15,17 @@ public class Player : MonoBehaviour
     }
     private void Awake()
     {
-        timer = MaxTime;
+        SetTimer();
+        _rm = GetComponent<PlayerRage>();
+        Debug.Log(_rm);
+        PlayerRage.onRageEnd += SetTimer;
     }
     public void Consume(Dropable d)
     {
         if (timer + d.AddTime < MaxTime)
             timer += d.AddTime;
         else
-            timer = MaxTime;
+            SetTimer();
     }
     public float ShootTimer
     {
@@ -32,8 +37,19 @@ public class Player : MonoBehaviour
         if (timer > 0)
             timer -= amount;
     }
+    private void SetTimer()
+    {
+        timer = MaxTime;
+        _inRage = false;
+    }
     private void Update()
     {
         timer -= Time.deltaTime/2;
+        if (timer <= 0 && !_inRage)
+        {
+            Debug.Log("Rage invoked");
+            _inRage = true;
+            StartCoroutine(_rm.Rage());
+        }
     }
 }
