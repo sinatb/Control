@@ -384,4 +384,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2aa5fa93fe5469a4bb4217fad2145346, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  RageTime: 3
+  RageTime: 4
+  Gun: {fileID: 8437593906814114739}
+  Bullet: {fileID: 7035252946960245323, guid: fa96086a3edcc6d44a77669a29f7ac90, type: 3}
