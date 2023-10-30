@@ -798,18 +798,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 5168602332243249073, guid: f1dff8aa4e0a4764aa0518b4793b604f, type: 3}
-      propertyPath: Gun
-      value: 
-      objectReference: {fileID: 9178234802126763215}
-    - target: {fileID: 5168602332243249073, guid: f1dff8aa4e0a4764aa0518b4793b604f, type: 3}
-      propertyPath: Bullet
-      value: 
-      objectReference: {fileID: 7035252946960245323, guid: fa96086a3edcc6d44a77669a29f7ac90, type: 3}
-    - target: {fileID: 5168602332243249073, guid: f1dff8aa4e0a4764aa0518b4793b604f, type: 3}
-      propertyPath: RageTime
-      value: 4
-      objectReference: {fileID: 0}
     - target: {fileID: 9178234802527201313, guid: f1dff8aa4e0a4764aa0518b4793b604f, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -864,8 +852,3 @@ PrefabInstance:
       objectReference: {fileID: 519420031}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f1dff8aa4e0a4764aa0518b4793b604f, type: 3}
---- !u!1 &9178234802126763215 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8437593906814114739, guid: f1dff8aa4e0a4764aa0518b4793b604f, type: 3}
-  m_PrefabInstance: {fileID: 9178234802126763214}
-  m_PrefabAsset: {fileID: 0}

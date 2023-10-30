@@ -387,3 +387,4 @@ MonoBehaviour:
   RageTime: 4
   Gun: {fileID: 8437593906814114739}
   Bullet: {fileID: 7035252946960245323, guid: fa96086a3edcc6d44a77669a29f7ac90, type: 3}
+  maincam: {fileID: 0}

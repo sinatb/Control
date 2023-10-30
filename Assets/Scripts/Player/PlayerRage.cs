@@ -1,12 +1,14 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Mathematics;
 [RequireComponent(typeof(PlayerShoot),typeof(PlayerBoost),typeof(Player))]
 public class PlayerRage : MonoBehaviour
 {
     [SerializeField] private float RageTime;
     [SerializeField] private GameObject Gun;
     [SerializeField] private GameObject Bullet;
+    [SerializeField] private Camera maincam;
     private List<Vector2> ShootingPos;
     public delegate void OnRageEnd();
     public static event OnRageEnd onRageEnd;
@@ -30,14 +32,26 @@ public class PlayerRage : MonoBehaviour
         GetComponent<PlayerBoost>().enabled = false;
         Gun.SetActive(false);
     }
+    private Vector2 rotate(Vector2 v, float delta)
+    {
+        return new Vector2(
+            v.x * Mathf.Cos(delta) - v.y * Mathf.Sin(delta),
+            v.x * Mathf.Sin(delta) + v.y * Mathf.Cos(delta)
+        );
+    }
     private void RageShoot()
     {
         var position = transform.position;
-        foreach(var x in ShootingPos)
+        var mousepos = maincam.ScreenToWorldPoint(Input.mousePosition);
+        var deltaX = mousepos.x - transform.position.x;
+        var deltaY = mousepos.y - transform.position.y;
+        var angle_mouse = math.degrees(math.atan2(deltaY, deltaX));
+        foreach (var x in ShootingPos)
         {
-            var angle = Mathf.Atan2(x.x, x.y) * Mathf.Rad2Deg;
+            var nx = rotate(x, angle_mouse * Mathf.Deg2Rad);
+            var angle = Mathf.Atan2(nx.x, nx.y) * Mathf.Rad2Deg;
             Instantiate(Bullet,
-                (Vector2)position + x,
+                (Vector2)position + nx,
                 Quaternion.Euler(new Vector3(0.0f, 0.0f, -angle))
                 );
         }
