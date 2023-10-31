@@ -2,9 +2,10 @@ using UnityEngine;
 
 public class Prince : MonoBehaviour,INCUnit
 {
-    [SerializeField] private float speed;
+    [SerializeField] private float MaxSpeed;
     [SerializeField] private float health;
     private Vector2 _direction;
+    private float speed;
     private Rigidbody2D _rb;
     public float Speed { get => speed; set => speed = value; }
     public float Health { get => health; set => health = value; }
@@ -12,6 +13,7 @@ public class Prince : MonoBehaviour,INCUnit
     private void Awake()
     {
         _rb = GetComponent<Rigidbody2D>();
+        speed = MaxSpeed;
     }
     public void Move()
     {
@@ -27,9 +29,18 @@ public class Prince : MonoBehaviour,INCUnit
             _direction = new Vector2(rndx, rndy).normalized;
         }
     }
+    public void ReceiveDamage(float amount)
+    {
+        health -= amount;
+    }
     private void Update()
     {
         PlanMove();
+        if (health <= 0)
+        {
+            speed = 0;
+            GameManager.gm?.Invoke();
+        }
     }
     private void FixedUpdate()
     {

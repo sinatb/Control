@@ -14,6 +14,8 @@ public class GameManager : MonoBehaviour
     public delegate void Morph(Vector2 spawnPos);
     public static Morph m;
 
+    public delegate void GameOver();
+    public static GameOver gm;
     public void BasicEnemyMorph(Vector2 spawnPos)
     {
         factories[1].GetEnemy(spawnPos);
@@ -34,6 +36,7 @@ public class GameManager : MonoBehaviour
         {
             Instance = this;
             m += BasicEnemyMorph;
+            gm += gameover;
         }
         else
         {
@@ -53,7 +56,10 @@ public class GameManager : MonoBehaviour
             StartCoroutine(SpawnTimer());
         }
     }
-
+    private void gameover()
+    {
+        canSpawn = false;
+    }
     public void EnemyDeath(EnemyType e)
     {
         if (e == EnemyType.BasicEnemy)

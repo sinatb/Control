@@ -16,8 +16,12 @@ public class bullet : MonoBehaviour
         if (col.transform.CompareTag("player_bullet")) return;
         var b = col.gameObject.GetComponent<IEnemy>();
         var c = col.gameObject.GetComponent<Player>();
+        var p = col.gameObject.GetComponent<Prince>();
         if (transform.CompareTag("player_bullet"))
+        {
             b?.ReceiveDamage(damage);
+            p?.ReceiveDamage(damage);
+        }
         else
             c?.ReceiveDamage(damage);
         Destroy(gameObject);

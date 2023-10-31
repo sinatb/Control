@@ -13,12 +13,22 @@ public class Player : MonoBehaviour
         get => speed;
         set => speed = value;
     }
+    private void GameOver()
+    {
+        speed = 0;
+        GetComponent<PlayerMovement>().enabled = false;
+        GetComponent<PlayerRage>().enabled = false;
+        GetComponent<PlayerCollision>().enabled = false;
+        GetComponent<PlayerShoot>().enabled = false;
+        GetComponent<PlayerRage>().enabled = false;
+        StopAllCoroutines();
+    }
     private void Awake()
     {
         SetTimer();
         _rm = GetComponent<PlayerRage>();
-        Debug.Log(_rm);
         PlayerRage.onRageEnd += SetTimer;
+        GameManager.gm += GameOver;
     }
     public void Consume(Dropable d)
     {

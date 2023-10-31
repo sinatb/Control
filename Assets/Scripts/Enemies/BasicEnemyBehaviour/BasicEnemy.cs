@@ -73,6 +73,7 @@ public class BasicEnemy : MonoBehaviour,INCUnit,IEnemy
         var rndx = Random.Range(0.0f, 1.0f);
         var rndy = Random.Range(0.0f, 1.0f);
         _direction = new Vector2(rndx, rndy).normalized;
+        GameManager.gm += GameOver;
     }
     //plan the next move
     private void Update()
@@ -89,11 +90,16 @@ public class BasicEnemy : MonoBehaviour,INCUnit,IEnemy
     {
         Move();
     }
-
+    private void GameOver()
+    {
+        speed = 0;
+    }
     public void Die()
     {
         Instantiate(Dropable, transform.position,
             Quaternion.identity);
+        GameManager.gm -= GameOver;
         GameManager.Instance.EnemyDeath(EnemyType.BasicEnemy);
+        Destroy(gameObject);
     }
 }

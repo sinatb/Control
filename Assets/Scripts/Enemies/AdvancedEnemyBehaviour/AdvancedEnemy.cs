@@ -40,7 +40,13 @@ public class AdvancedEnemy : MonoBehaviour,INCUnit,IEnemy
         get => damage;
         set => damage = value;
     }
-
+    private void GameOver()
+    {
+        if (gameObject == null) return;
+        GetComponent<AdvancedEnemyShoot>().enabled = false;
+        GetComponent<AdvancedEnemyCollision>().enabled = false;
+        speed = 0;
+    }
     private IEnumerator AttackTimer(float time)
     {
         _isAttacking = true;
@@ -56,6 +62,7 @@ public class AdvancedEnemy : MonoBehaviour,INCUnit,IEnemy
         var rndx = Random.Range(0.0f, 1.0f);
         var rndy = Random.Range(0.0f, 1.0f);
         _direction = new Vector2(rndx, rndy).normalized;
+        GameManager.gm += GameOver;
     }
 
     public void PlanMove()
@@ -115,7 +122,9 @@ public class AdvancedEnemy : MonoBehaviour,INCUnit,IEnemy
     {
         Instantiate(Dropable, transform.position,
         Quaternion.identity);
+        GameManager.gm -= GameOver;
         GameManager.Instance.EnemyDeath(EnemyType.AdvancedEnemy);
+        Destroy(gameObject);
     }
     private void FixedUpdate()
     {
