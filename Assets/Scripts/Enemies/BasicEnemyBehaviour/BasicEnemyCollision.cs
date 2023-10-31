@@ -22,7 +22,8 @@ public class BasicEnemyCollision : MonoBehaviour
         }
         if (col.transform.CompareTag("Wall") || col.transform.CompareTag("Morphing_Enemy") 
                                              || col.transform.CompareTag("Advanced_Enemy")
-                                             || col.transform.CompareTag("Dropable"))
+                                             || col.transform.CompareTag("Dropable")
+                                             || col.transform.CompareTag("Prince"))
         {
             var inNormal = col.contacts[0].normal;
             var direction = _be.Direction;

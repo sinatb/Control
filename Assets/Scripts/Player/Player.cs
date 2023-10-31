@@ -47,7 +47,6 @@ public class Player : MonoBehaviour
         timer -= Time.deltaTime/2;
         if (timer <= 0 && !_inRage)
         {
-            Debug.Log("Rage invoked");
             _inRage = true;
             StartCoroutine(_rm.Rage());
         }

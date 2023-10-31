@@ -7,7 +7,7 @@ public class AdvancedEnemyCollision : MonoBehaviour
     private void Awake()
     {
         _ae = gameObject.GetComponent<AdvancedEnemy>();
-        _tags = new List<string>(new string[] { "Wall", "Morphing_Enemy", "Advanced_Enemy", "Dropable" });
+        _tags = new List<string>(new string[] { "Wall", "Morphing_Enemy", "Advanced_Enemy", "Dropable", "Prince" });
     }
     private void OnCollisionEnter2D(Collision2D col)
     {
