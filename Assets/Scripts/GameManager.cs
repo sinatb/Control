@@ -1,5 +1,7 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 using Random = UnityEngine.Random;
 
 public class GameManager : MonoBehaviour
@@ -8,8 +10,11 @@ public class GameManager : MonoBehaviour
     [SerializeField] private EnemyFactory[] factories;
     [SerializeField] private float spawntimer;
     private bool canSpawn = true;
-    [SerializeField]private int _basicEnemyCount;
-    [SerializeField]private int _advancedEnemyCount;
+    private int _basicEnemyCount;
+    private int _advancedEnemyCount;
+    [SerializeField] private TextMeshProUGUI timer;
+    private float timer_value;
+    private bool _isgameRunning = true;
 
     public delegate void Morph(Vector2 spawnPos);
     public static Morph m;
@@ -59,6 +64,7 @@ public class GameManager : MonoBehaviour
     private void gameover()
     {
         canSpawn = false;
+        _isgameRunning = false;
     }
     public void EnemyDeath(EnemyType e)
     {
@@ -70,8 +76,17 @@ public class GameManager : MonoBehaviour
         canSpawn = false;
         StartCoroutine(SpawnTimer());
     }
+    private void UpdateTimer() 
+    {
+        timer.text = timer_value.ToString("0.00");
+    }
     private void Update()
     {
         EnemySpawner();
+        if (_isgameRunning)
+        {
+            timer_value += Time.deltaTime;
+            UpdateTimer();
+        }
     }
 }
