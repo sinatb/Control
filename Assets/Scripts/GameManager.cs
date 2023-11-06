@@ -21,6 +21,9 @@ public class GameManager : MonoBehaviour
 
     public delegate void GameOver();
     public static GameOver gm;
+
+    public delegate void Restart();
+    public static Restart rs;
     public void BasicEnemyMorph(Vector2 spawnPos)
     {
         factories[1].GetEnemy(spawnPos);
