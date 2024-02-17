@@ -2,7 +2,8 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    [SerializeField] private float speed;
+    [SerializeField] private float MaxSpeed;
+    private float speed;
     [SerializeField] private float shootTimer;
     [SerializeField] private float timer;
     [SerializeField] private float MaxTime;
@@ -23,12 +24,24 @@ public class Player : MonoBehaviour
         GetComponent<PlayerRage>().enabled = false;
         StopAllCoroutines();
     }
+    private void restart()
+    {
+        GetComponent<PlayerMovement>().enabled = true;
+        GetComponent<PlayerRage>().enabled = true;
+        GetComponent<PlayerCollision>().enabled = true;
+        GetComponent<PlayerShoot>().enabled = true;
+        GetComponent<PlayerRage>().enabled = true;
+        speed = MaxSpeed;
+
+    }
     private void Awake()
     {
         SetTimer();
         _rm = GetComponent<PlayerRage>();
         PlayerRage.onRageEnd += SetTimer;
+        GameManager.rs += restart;
         GameManager.gm += GameOver;
+        speed = MaxSpeed;
     }
     public void Consume(Dropable d)
     {

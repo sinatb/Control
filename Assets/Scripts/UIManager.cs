@@ -9,6 +9,7 @@ public class UIManager : MonoBehaviour
     private void Start()
     {
         gameoverpanel.SetActive(false);
+        GameManager.rs += deactivatePanel;
         GameManager.gm += activatePanel;
     }
     private void activatePanel()
@@ -19,8 +20,12 @@ public class UIManager : MonoBehaviour
     {
         gameoverpanel.SetActive(false);
     }
+    public void restart()
+    {
+        GameManager.rs?.Invoke();
+    }
     private void Update()
     {
-        
+
     }
 }

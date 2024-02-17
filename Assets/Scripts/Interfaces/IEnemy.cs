@@ -7,5 +7,5 @@ public interface IEnemy
     }
     public void Attack(Player p);
     public void ReceiveDamage(float amount);
-    public void Die();
+    public void Die(bool drop);
 }

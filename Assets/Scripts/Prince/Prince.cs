@@ -40,6 +40,7 @@ public class Prince : MonoBehaviour,INCUnit
         {
             speed = 0;
             GameManager.gm?.Invoke();
+            health = 300;
         }
     }
     private void FixedUpdate()

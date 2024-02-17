@@ -80,7 +80,7 @@ public class BasicEnemy : MonoBehaviour,INCUnit,IEnemy
     {
         if (health <= 0)
         {
-            Die();
+            Die(true);
             Destroy(gameObject);
         }
         PlanMove();
@@ -94,10 +94,11 @@ public class BasicEnemy : MonoBehaviour,INCUnit,IEnemy
     {
         speed = 0;
     }
-    public void Die()
+    public void Die(bool drop)
     {
-        Instantiate(Dropable, transform.position,
-            Quaternion.identity);
+        if (drop) 
+            Instantiate(Dropable, transform.position,
+                Quaternion.identity);
         GameManager.gm -= GameOver;
         GameManager.Instance.EnemyDeath(EnemyType.BasicEnemy);
         Destroy(gameObject);

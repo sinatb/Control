@@ -43,6 +43,7 @@ public class AdvancedEnemy : MonoBehaviour,INCUnit,IEnemy
     private void GameOver()
     {
         if (gameObject == null) return;
+        _canAttack = false;
         GetComponent<AdvancedEnemyShoot>().enabled = false;
         GetComponent<AdvancedEnemyCollision>().enabled = false;
         speed = 0;
@@ -110,7 +111,7 @@ public class AdvancedEnemy : MonoBehaviour,INCUnit,IEnemy
     {
         if (health <= 0)
         {
-            Die();
+            Die(true);
             Destroy(gameObject);
         }
         if (_target != null)
@@ -118,9 +119,10 @@ public class AdvancedEnemy : MonoBehaviour,INCUnit,IEnemy
         PlanMove();
 
     }
-    public void Die()
+    public void Die(bool drop)
     {
-        Instantiate(Dropable, transform.position,
+        if (drop) 
+            Instantiate(Dropable, transform.position,
         Quaternion.identity);
         GameManager.gm -= GameOver;
         GameManager.Instance.EnemyDeath(EnemyType.AdvancedEnemy);

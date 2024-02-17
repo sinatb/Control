@@ -32,7 +32,7 @@ public class GameManager : MonoBehaviour
     }
     private IEnumerator SpawnTimer()
     {
-        if (!canSpawn)
+        if (!canSpawn && _isgameRunning)
         {
             yield return new WaitForSeconds(spawntimer);
             canSpawn = true;
@@ -45,6 +45,7 @@ public class GameManager : MonoBehaviour
             Instance = this;
             m += BasicEnemyMorph;
             gm += gameover;
+            rs += restart;
         }
         else
         {
@@ -69,6 +70,22 @@ public class GameManager : MonoBehaviour
         canSpawn = false;
         _isgameRunning = false;
     }
+    private void restart()
+    {
+        _isgameRunning = true;
+        canSpawn = true;
+        timer_value = 0;
+        var bec = GameObject.Find("Enemy-Container");
+        foreach(Transform child in bec.transform)
+        {
+           child.GetComponent<BasicEnemy>().Die(false);
+        }
+        var aec = GameObject.Find("Advanced-Enemy-Container");
+        foreach(Transform child in aec.transform) 
+        { 
+            child.GetComponent<AdvancedEnemy>().Die(false); 
+        }
+    }
     public void EnemyDeath(EnemyType e)
     {
         if (e == EnemyType.BasicEnemy)
@@ -92,4 +109,5 @@ public class GameManager : MonoBehaviour
             UpdateTimer();
         }
     }
+
 }
