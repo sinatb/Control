@@ -92,7 +92,14 @@ public class BasicEnemy : MonoBehaviour,INCUnit,IEnemy
     }
     private void GameOver()
     {
+        gameObject.GetComponent<BasicEnemyCollision>().enabled = false;
+        gameObject.GetComponent<BasicEnemyAnimation>().enabled = false;
+        //gameObject.GetComponent<BasicEnemyMorphManager>().enabled = false;
         speed = 0;
+    }
+    private void OnDestroy()
+    {
+        GameManager.gm -= GameOver;
     }
     public void Die(bool drop)
     {

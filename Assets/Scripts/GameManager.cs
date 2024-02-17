@@ -102,6 +102,8 @@ public class GameManager : MonoBehaviour
     }
     private void Update()
     {
+        if (!_isgameRunning) 
+            canSpawn = false;
         EnemySpawner();
         if (_isgameRunning)
         {
