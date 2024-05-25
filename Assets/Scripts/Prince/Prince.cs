@@ -3,16 +3,22 @@ using UnityEngine;
 public class Prince : MonoBehaviour,INCUnit
 {
     [SerializeField] private float MaxSpeed;
-    [SerializeField] private float health;
+    [SerializeField] private float MaxHealth;
+    [SerializeField] private Color _deathColor;
+    [SerializeField] private Color _aliveColor;
+    private float health;
     private Vector2 _direction;
     private float speed;
     private Rigidbody2D _rb;
+    private SpriteRenderer _spriteRenderer;
     public float Speed { get => speed; set => speed = value; }
     public float Health { get => health; set => health = value; }
     public Vector2 Direction { get => _direction; set => _direction = value; }
     private void Awake()
     {
         _rb = GetComponent<Rigidbody2D>();
+        _spriteRenderer = GetComponent<SpriteRenderer>();
+        health = MaxHealth;
         speed = MaxSpeed;
         GameManager.rs += restart;
     }
@@ -36,6 +42,7 @@ public class Prince : MonoBehaviour,INCUnit
     }
     private void Update()
     {
+        _spriteRenderer.color = Color.Lerp(_deathColor, _aliveColor, health / MaxHealth);
         PlanMove();
         if (health <= 0)
         {
@@ -47,6 +54,7 @@ public class Prince : MonoBehaviour,INCUnit
     private void restart()
     {
         speed = MaxSpeed;
+        health = MaxHealth;
     }
     private void FixedUpdate()
     {
