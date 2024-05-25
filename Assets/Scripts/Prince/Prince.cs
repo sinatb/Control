@@ -14,6 +14,7 @@ public class Prince : MonoBehaviour,INCUnit
     {
         _rb = GetComponent<Rigidbody2D>();
         speed = MaxSpeed;
+        GameManager.rs += restart;
     }
     public void Move()
     {
@@ -42,6 +43,10 @@ public class Prince : MonoBehaviour,INCUnit
             GameManager.gm?.Invoke();
             health = 300;
         }
+    }
+    private void restart()
+    {
+        speed = MaxSpeed;
     }
     private void FixedUpdate()
     {

@@ -106,7 +106,6 @@ public class BasicEnemy : MonoBehaviour,INCUnit,IEnemy
         if (drop) 
             Instantiate(Dropable, transform.position,
                 Quaternion.identity);
-        GameManager.gm -= GameOver;
         GameManager.Instance.EnemyDeath(EnemyType.BasicEnemy);
         Destroy(gameObject);
     }
