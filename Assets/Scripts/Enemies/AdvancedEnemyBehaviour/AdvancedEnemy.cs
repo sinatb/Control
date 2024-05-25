@@ -12,6 +12,7 @@ public class AdvancedEnemy : MonoBehaviour,INCUnit,IEnemy
     [SerializeField] private float attackTime;
     [SerializeField] private GameObject Dropable;
 
+    private bool running = true;
     private Player _target;
     private bool _canAttack;
     private float _maxSpeed;
@@ -46,6 +47,7 @@ public class AdvancedEnemy : MonoBehaviour,INCUnit,IEnemy
         _canAttack = false;
         GetComponent<AdvancedEnemyShoot>().enabled = false;
         GetComponent<AdvancedEnemyCollision>().enabled = false;
+        running = false;
         speed = 0;
     }
     private IEnumerator AttackTimer(float time)
@@ -81,7 +83,8 @@ public class AdvancedEnemy : MonoBehaviour,INCUnit,IEnemy
             };
             if (!hit.transform.CompareTag("Player")) continue;
             _target = hit.transform.GetComponent<Player>();
-            speed = Mathf.Lerp(speed, hit.distance > 3.0f ? _maxSpeed : 0.0f, 0.1f*Time.deltaTime);
+            if (running)
+                speed = Mathf.Lerp(speed, hit.distance > 3.0f ? _maxSpeed : 0.0f, 0.1f*Time.deltaTime);
             if (hit.distance <= 4.0f && !_isAttacking)
             {
                 StartCoroutine(AttackTimer(attackTime));
@@ -109,22 +112,29 @@ public class AdvancedEnemy : MonoBehaviour,INCUnit,IEnemy
     }
     private void Update()
     {
-        if (health <= 0)
+        if (running)
         {
-            Die(true);
-            Destroy(gameObject);
+            if (health <= 0)
+            {
+                Die(true);
+            }
+            if (_target != null)
+                Attack(_target);
+            PlanMove();
         }
-        if (_target != null)
-            Attack(_target);
-        PlanMove();
 
+    }
+    private void OnDestroy()
+    {
+        GameManager.gm -= GameOver;
     }
     public void Die(bool drop)
     {
         if (drop) 
-            Instantiate(Dropable, transform.position,
-        Quaternion.identity);
-        GameManager.gm -= GameOver;
+            Instantiate(Dropable, 
+                        transform.position,
+                        Quaternion.identity
+                        );
         GameManager.Instance.EnemyDeath(EnemyType.AdvancedEnemy);
         Destroy(gameObject);
     }

@@ -82,7 +82,7 @@ public class GameManager : MonoBehaviour
         }
         var aec = GameObject.Find("Advanced-Enemy-Container");
         foreach(Transform child in aec.transform) 
-        { 
+        {
             child.GetComponent<AdvancedEnemy>().Die(false); 
         }
     }
