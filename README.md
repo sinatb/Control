@@ -1,6 +1,6 @@
 # Control
 
-A simple game in unity with the theme out of control. This project is a single project in a series of projects aiming to mimic some cool games that were submitted to the GMTK game jam.
+A simple game in unity with the theme out of control. This project is a single project in a series of projects aiming to mimic some cool games that were submitted to the GMTK game jam. The game that this project was inspired by is [here](https://arvz.itch.io/shooty-ballz).
 
 ## Gameplay
 
