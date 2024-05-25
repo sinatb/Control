@@ -31,6 +31,7 @@ public class Player : MonoBehaviour
         GetComponent<PlayerCollision>().enabled = true;
         GetComponent<PlayerShoot>().enabled = true;
         GetComponent<PlayerRage>().enabled = true;
+        GetComponent<PlayerRage>().EndRage();
         speed = MaxSpeed;
 
     }

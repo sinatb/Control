@@ -56,7 +56,7 @@ public class PlayerRage : MonoBehaviour
                 );
         }
     }
-    private void EndRage() 
+    public void EndRage() 
     {
         GetComponent<PlayerShoot>().enabled = true;
         GetComponent<PlayerBoost>().enabled = true;
