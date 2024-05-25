@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
@@ -7,6 +8,8 @@ public class Player : MonoBehaviour
     [SerializeField] private float shootTimer;
     [SerializeField] private float timer;
     [SerializeField] private float MaxTime;
+    [SerializeField] private Slider time_slider;
+    private bool running=true;
     private bool _inRage;
     private PlayerRage _rm;
     public float Speed
@@ -23,6 +26,7 @@ public class Player : MonoBehaviour
         GetComponent<PlayerShoot>().enabled = false;
         GetComponent<PlayerRage>().enabled = false;
         StopAllCoroutines();
+        running = false;
     }
     private void restart()
     {
@@ -33,7 +37,8 @@ public class Player : MonoBehaviour
         GetComponent<PlayerRage>().enabled = true;
         GetComponent<PlayerRage>().EndRage();
         speed = MaxSpeed;
-
+        timer = MaxTime;
+        running = true;
     }
     private void Awake()
     {
@@ -68,11 +73,15 @@ public class Player : MonoBehaviour
     }
     private void Update()
     {
-        timer -= Time.deltaTime/2;
-        if (timer <= 0 && !_inRage)
+        if (running)
         {
-            _inRage = true;
-            StartCoroutine(_rm.Rage());
+            timer -= Time.deltaTime / 2;
+            if (timer <= 0 && !_inRage)
+            {
+                _inRage = true;
+                StartCoroutine(_rm.Rage());
+            }
+            time_slider.value = timer / MaxTime;
         }
     }
 }
